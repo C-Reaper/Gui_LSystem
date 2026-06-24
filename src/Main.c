@@ -40,10 +40,11 @@ void Update(AlxWindow* w){
 		
         if(ch == 'F'){
             const Vec2 target = { 0.0f,1.0f };
-            LSystem_Translate(&ls,target);
 
             const Vec2 p0 = TransformedView_WorldScreenPos(&tv,LSystem_Calc(&ls,(Vec2){ 0.0f,0.0f }));
-            const Vec2 p1 = TransformedView_WorldScreenPos(&tv,LSystem_Calc(&ls,target));
+            LSystem_Translate(&ls,target);
+
+            const Vec2 p1 = TransformedView_WorldScreenPos(&tv,LSystem_Calc(&ls,Vec2_Neg(target)));
             Line_RenderX(WINDOW_STD_ARGS,p0,p1,WHITE,1.0f);
         }else if(ch == '+'){
             LSystem_Rotate(&ls,F32_PI05 * 0.33f);
