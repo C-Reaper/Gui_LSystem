@@ -19,7 +19,8 @@ void Setup(AlxWindow* w){
 
     ls = LSystem_New();
     LSystem_SetAxiom(&ls,"F");
-    LSystem_Set(&ls,'F',"FF+[+F-F-F]-[-F+F+F]");
+    //LSystem_Set(&ls,'F',"FF+[+F-F-F]-[-F+F+F]");
+    LSystem_Set(&ls,'F',"FFF+[+FF-FF]-[-FF+FF]");
 }
 
 void Update(AlxWindow* w){
@@ -48,6 +49,10 @@ void Update(AlxWindow* w){
             const Vec2 out1 = LSystem_Calc(&ls,(Vec2){ 0.0f,0.0f });
             const Vec2 p1 = TransformedView_WorldScreenPos(&tv,out1);
             Line_RenderX(WINDOW_STD_ARGS,p0,p1,WHITE,1.0f);
+        }else if(ch == '>'){
+            LSystem_Translate(&ls,(Vec2){ 0.0f,1.0f });
+        }else if(ch == '<'){
+            LSystem_Translate(&ls,(Vec2){ 0.0f,-1.0f });
         }else if(ch == '+'){
             LSystem_Rotate(&ls,F32_PI05 * 0.33f);
         }else if(ch == '-'){
