@@ -39,12 +39,14 @@ void Update(AlxWindow* w){
 		unsigned char ch = (unsigned char)String_Get(&ls.out,i);
 		
         if(ch == 'F'){
-            const Vec2 target = { 0.0f,1.0f };
+            const Vec2 target = { 0.0f,-1.0f };
 
-            const Vec2 p0 = TransformedView_WorldScreenPos(&tv,LSystem_Calc(&ls,(Vec2){ 0.0f,0.0f }));
+            const Vec2 out0 = LSystem_Calc(&ls,(Vec2){ 0.0f,0.0f });
+            const Vec2 p0 = TransformedView_WorldScreenPos(&tv,out0);
             LSystem_Translate(&ls,target);
 
-            const Vec2 p1 = TransformedView_WorldScreenPos(&tv,LSystem_Calc(&ls,Vec2_Neg(target)));
+            const Vec2 out1 = LSystem_Calc(&ls,(Vec2){ 0.0f,0.0f });
+            const Vec2 p1 = TransformedView_WorldScreenPos(&tv,out1);
             Line_RenderX(WINDOW_STD_ARGS,p0,p1,WHITE,1.0f);
         }else if(ch == '+'){
             LSystem_Rotate(&ls,F32_PI05 * 0.33f);
